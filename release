@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -e
+
+if [[ -z $1 ]]; then
+    echo "Enter new version: "
+    read -r VERSION
+else
+    VERSION=$1
+fi
+
+read -p "Releasing $VERSION - are you sure? (y/n) " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "Releasing $VERSION ..."
+
+    # 2. build assets
+    VERSION=$VERSION npm run build
+
+    # 3. force-commit the dist/ directory (this keeps the repo clean)
+    git add -A
+    git add -f dist/*.js
+    git commit -m "build: build $VERSION"
+    # 4. update package version
+    npm version "$VERSION" --message "build: tag $VERSION"
+
+    # 5. publish new version to origin
+    # git push origin refs/tags/"$VERSION"
+    
+    # 6. equal local master branch to remote master
+    # git reset --hard origin/master
+fi
