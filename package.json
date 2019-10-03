@@ -22,10 +22,10 @@
     "chai": "^4.2.0",
     "js-cookie": "^2.2.0",
     "localforage": "^1.7.2",
-    "lodash": "^4.17.14",
+    "lodash": "^4.17.15",
     "mocha": "^6.1.4",
     "sinon": "^7.3.2",
     "webpack": "^3.12.0",
-    "wolfy87-eventemitter": "^5.2.5"
+    "wolfy87-eventemitter": "^5.2.8"
   }
 }
